@@ -14,6 +14,9 @@ FROM
     job_postings_fact jobs
 INNER JOIN skills_job_dim skills_job ON jobs.job_id = skills_job.job_id
 INNER JOIN skills_dim skills ON skills_job.skill_id = skills.skill_id
+WHERE
+    job_title_short = 'Data Analyst' AND
+    job_work_from_home = TRUE
 GROUP BY
     skills.skills
 ORDER BY
