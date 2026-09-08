@@ -52,3 +52,26 @@ ORDER BY
     avg_salary DESC,
     demand_count DESC
 LIMIT 25;
+
+SELECT
+    skills.skill_id,
+    skills.skills,
+    COUNT(jobs.job_id) AS demand_count,
+    ROUND(AVG(jobs.salary_year_avg), 0) AS avg_salary
+FROM
+    job_postings_fact jobs
+INNER JOIN skills_job_dim skills_job ON jobs.job_id = skills_job.job_id
+INNER JOIN skills_dim skills ON skills_job.skill_id = skills.skill_id
+WHERE
+    jobs.job_title_short = 'Data Analyst'
+    AND jobs.salary_year_avg IS NOT NULL
+    AND jobs.job_work_from_home = TRUE
+GROUP BY
+    skills.skill_id,
+    skills.skills
+HAVING
+    COUNT(jobs.job_id) > 10
+ORDER BY
+    avg_salary DESC,
+    demand_count DESC
+LIMIT 25;
