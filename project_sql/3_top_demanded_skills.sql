@@ -8,8 +8,8 @@ What are the most in-demand skills for data analysts?
 */
 
 SELECT
-    skills.skills,
-    COUNT(*) AS number_of_jobs
+    skills.skills AS skills,
+    COUNT(*) AS demand_count
 FROM
     job_postings_fact jobs
 INNER JOIN skills_job_dim skills_job ON jobs.job_id = skills_job.job_id
